@@ -1,0 +1,8 @@
+.fill-block{
+  width: -webkit-fill-available;
+}
+
+.product-thum{
+  height: 200px;
+  object-fit: cover;
+}
