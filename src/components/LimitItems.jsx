@@ -14,7 +14,9 @@ const LimitItems = () => {
   }, []);
 
   const getList = async () => {
-    let results = await fetch("http://localhost:3000/products");
+    let results = await fetch(
+      "https://ecommerce-react-redux-m41t.onrender.com/products"
+    );
 
     results = await results.json();
     setProducts(results);

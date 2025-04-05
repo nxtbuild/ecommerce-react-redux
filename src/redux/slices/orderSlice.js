@@ -8,7 +8,9 @@ export const placeOrderAPI = createAsyncThunk(
     try {
       // Fetch all cart items
 
-      const cartResponse = await fetch("http://localhost:3000/carts");
+      const cartResponse = await fetch(
+        "https://ecommerce-react-redux-m41t.onrender.com/carts"
+      );
       const cartItems = await cartResponse.json();
 
       if (cartItems.length === 0) {
@@ -26,11 +28,14 @@ export const placeOrderAPI = createAsyncThunk(
 
       // Save the order to database
 
-      const orderResponse = await fetch("http://localhost:3000/orders", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(order),
-      });
+      const orderResponse = await fetch(
+        "https://ecommerce-react-redux-m41t.onrender.com/orders",
+        {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify(order),
+        }
+      );
 
       if (!orderResponse.ok) {
         throw new Error("Failed to place order");
@@ -39,9 +44,12 @@ export const placeOrderAPI = createAsyncThunk(
       // Deelete cart
 
       for (const item of cartItems) {
-        await fetch(`http://localhost:3000/carts/${item.id}`, {
-          method: "DELETE",
-        });
+        await fetch(
+          `https://ecommerce-react-redux-m41t.onrender.com/carts/${item.id}`,
+          {
+            method: "DELETE",
+          }
+        );
       }
 
       // Dispatch an action to clear cart in redux store

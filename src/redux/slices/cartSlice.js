@@ -2,7 +2,9 @@ import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 
 // Fetch cart data from API
 export const fetchCart = createAsyncThunk("cart/fetchCart", async () => {
-  const response = await fetch("http://localhost:3000/carts");
+  const response = await fetch(
+    "https://ecommerce-react-redux-m41t.onrender.com/carts"
+  );
   return response.json();
 });
 
@@ -10,7 +12,9 @@ export const fetchCart = createAsyncThunk("cart/fetchCart", async () => {
 export const addToCartAPI = createAsyncThunk(
   "cart/addToCartAPI",
   async (cartItem) => {
-    const cartResponse = await fetch("http://localhost:3000/carts");
+    const cartResponse = await fetch(
+      "https://ecommerce-react-redux-m41t.onrender.com/carts"
+    );
     const cartItems = await cartResponse.json();
 
     // Check if product already exists in cart
@@ -26,19 +30,25 @@ export const addToCartAPI = createAsyncThunk(
           (existingItem.quantity + cartItem.quantity) * existingItem.price,
       };
 
-      await fetch(`http://localhost:3000/carts/${existingItem.id}`, {
-        method: "PUT",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(updatedItem),
-      });
+      await fetch(
+        `https://ecommerce-react-redux-m41t.onrender.com/carts/${existingItem.id}`,
+        {
+          method: "PUT",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify(updatedItem),
+        }
+      );
 
       return updatedItem;
     } else {
-      const response = await fetch("http://localhost:3000/carts", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(cartItem),
-      });
+      const response = await fetch(
+        "https://ecommerce-react-redux-m41t.onrender.com/carts",
+        {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify(cartItem),
+        }
+      );
       return response.json();
     }
   }
@@ -48,7 +58,9 @@ export const addToCartAPI = createAsyncThunk(
 export const removeFromCartAPI = createAsyncThunk(
   "cart/removeFromCartAPI",
   async (id) => {
-    await fetch(`http://localhost:3000/carts/${id}`, { method: "DELETE" });
+    await fetch(`https://ecommerce-react-redux-m41t.onrender.com/carts/${id}`, {
+      method: "DELETE",
+    });
     return id;
   }
 );
@@ -57,11 +69,14 @@ export const removeFromCartAPI = createAsyncThunk(
 export const updateQuantityAPI = createAsyncThunk(
   "cart/updateQuantityAPI",
   async ({ id, quantity }) => {
-    const response = await fetch(`http://localhost:3000/carts/${id}`, {
-      method: "PATCH",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ quantity }),
-    });
+    const response = await fetch(
+      `https://ecommerce-react-redux-m41t.onrender.com/carts/${id}`,
+      {
+        method: "PATCH",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ quantity }),
+      }
+    );
     return response.json();
   }
 );

@@ -6,7 +6,7 @@ import { useDispatch } from "react-redux";
 const Productinfo = () => {
   const { id } = useParams();
   const dispatch = useDispatch();
-  const APIURL = "http://localhost:3000/products/";
+  const APIURL = "https://ecommerce-react-redux-m41t.onrender.com/products/";
 
   const [product, setProduct] = useState(null);
   const [quantity, setQuantity] = useState(1);
